@@ -1,0 +1,23 @@
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Receipt numbers and case histories are sensitive local research data.
+data/
+exports/private/
+*.sqlite
+*.sqlite3
+*.db
+
+# Local logs can contain request metadata.
+*.log
+
