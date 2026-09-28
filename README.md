@@ -27,9 +27,22 @@ As documented by USCIS (verified September 25, 2026):
 4. Authenticate with OAuth 2.0 client credentials at `https://api-int.uscis.gov/oauth/accesstoken`. Access tokens last about 30 minutes.
 5. Call the sandbox resource at `https://api-int.uscis.gov/case-status/{receiptNumber}`. Only USCIS's published staging receipts work there.
 6. Stay within [sandbox limits](https://developer.uscis.gov/node/144): 1,000 Case Status requests/day and 5 transactions/second.
-7. Before requesting production access, generate sandbox traffic for at least five consecutive calendar days and demonstrate both successful (`200`) and error (`4xx`) responses. Then contact `developersupport@uscis.dhs.gov`.
+7. Before starting the production-access process, generate sandbox traffic for at least five consecutive calendar days and demonstrate both successful (`200`) and error (`4xx`) responses.
 
 Production URLs and credentials are supplied only after USCIS approval. The application deliberately refuses `USCIS_ENVIRONMENT=production` unless both production URLs are explicitly configured.
+
+### Production access is organization-gated
+
+The five-day sandbox test is only the first prerequisite. It does **not** by itself make an individual developer eligible for production access. USCIS currently requires an affidavit and verification process that includes:
+
+- a U.S.-incorporated company or organization;
+- an authorized signatory who can legally bind that entity;
+- a business website, privacy policy, and terms of service;
+- documented data-retention, deletion, sharing, breach, consent, and ownership-transfer practices;
+- a USCIS-provided `demo_id` header; and
+- a live, end-to-end application demonstration covering authentication, user flows, case-status presentation, and documented HTTPS response handling.
+
+USCIS reviews the organization and its public policies before scheduling the demo. A personal or hobby project should therefore be treated as sandbox-only unless it is adopted by a qualifying organization or USCIS confirms another acceptable path in writing. See the official [production-access process](https://developer.uscis.gov/get-started/production-access) and [affidavit requirements](https://developer.uscis.gov/get-started/production-access/affidavit).
 
 ## Quick start
 
@@ -55,7 +68,7 @@ Previewing does not call USCIS:
 uscis-cohort plan-cohort --center IOE1234567890 --before 50 --after 50
 ```
 
-After production approval and configuration, a bounded scan is explicit and requires confirmation:
+After organizational eligibility, affidavit review, a successful USCIS demo, production approval, and configuration, a bounded scan is explicit and requires confirmation:
 
 ```bash
 export USCIS_ENVIRONMENT=production
@@ -102,4 +115,3 @@ See [`docs/threat-model.md`](docs/threat-model.md) and [`SECURITY.md`](SECURITY.
 ## License
 
 MIT
-
